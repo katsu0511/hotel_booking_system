@@ -58,7 +58,9 @@ public class IndexRoomServlet extends HttpServlet {
 				conn = db.getConnection();
 				String sql1 = "SELECT h.HotelID, h.Name, c.CountryCode, n.PhoneNumber, h.Street, p.City, p.Province, c.Country, p.PostalCode "
 							+ "FROM Hotel h, HotelCountry c, HotelPostalCode p, HotelPhoneNumber n "
-							+ "WHERE h.PhoneNumber = n.PhoneNumber AND h.PostalCode = p.PostalCode AND n.CountryCode = c.CountryCode "
+							+ "WHERE h.PhoneNumber = n.PhoneNumber "
+							+ "AND h.PostalCode = p.PostalCode "
+							+ "AND n.CountryCode = c.CountryCode "
 							+ "AND h.HotelID = ?";
 				pstmt1 = conn.prepareStatement(sql1);
 				pstmt1.setString(1, HOTEL_ID);
@@ -79,7 +81,10 @@ public class IndexRoomServlet extends HttpServlet {
 				
 				String sql2 = "SELECT r.RoomNumber, r.RoomType, c.Cost, t.Tax "
 							+ "FROM Hotel h, Room r, RoomCost c, CostAndTax t "
-							+ "WHERE h.HotelID = r.HotelID AND (h.HotelID = c.HotelID AND r.RoomType = c.RoomType) AND c.Cost = t.Cost AND h.HotelID = ? "
+							+ "WHERE h.HotelID = r.HotelID "
+							+ "AND (h.HotelID = c.HotelID AND r.RoomType = c.RoomType) "
+							+ "AND c.Cost = t.Cost "
+							+ "AND h.HotelID = ? "
 							+ "ORDER BY RoomNumber";
 				pstmt2 = conn.prepareStatement(sql2);
 				pstmt2.setString(1, HOTEL_ID);

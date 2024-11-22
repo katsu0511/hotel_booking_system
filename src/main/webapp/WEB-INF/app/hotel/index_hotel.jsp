@@ -9,13 +9,19 @@
 				<h2>Hotel</h2>
 			</div>
 			<div class="list">
-			<% for (Map<String, String> hotel : hotels) { %>
-				<div class="hotel_div">
-					<a href="<%= request.getContextPath() %>/index/room?id=<%= hotel.get("id") %>"><%= hotel.get("name") %></a>
+				<div class="menus">
+					<% for (Map<String, String> hotel : hotels) { %>
+						<div class="menu">
+							<a href="<%= request.getContextPath() %>/index/room?id=<%= hotel.get("id") %>"><%= hotel.get("name") %></a>
+						</div>
+					<% } %>
 				</div>
-			<% } %>
 			</div>
-			<a href="<%= request.getContextPath() %>/top">Back to Top</a>
+			<div class="links">
+				<div class="link">
+					<a href="<%= request.getContextPath() %>/top">Back to Top</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </main>

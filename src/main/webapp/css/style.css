@@ -1,7 +1,361 @@
 @charset "UTF-8";
 
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
 .error {
 	display: none;
 	color: red;
   	font-size: 20px;
+  	text-align: center;
+}
+
+.error_message {
+	color: red;
+  	font-size: 20px;
+  	text-align: center;
+}
+
+#date_error {
+	color: red;
+  	font-size: 20px;
+}
+
+.container {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+main {
+	box-sizing: border-box;
+	width: 100%;
+	min-height: calc(100vh - 100px);
+	padding-bottom: 30px;
+}
+
+header {
+	display: block;
+	background-color: #66ffff;
+	width: 100%;
+	height: 60px;
+}
+
+header .container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.button {
+	display: block;
+	background-color: #00ccff;
+	border: solid 2px #00ccff;
+	width: 100px;
+	height: 30px;
+	border-radius: 5px;
+	margin: 15px 0;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.button:hover, h1 a:hover {
+	opacity: 0.6;
+}
+
+h1, h2 {
+	padding: 0;
+	margin: 0;
+}
+
+h3 {
+	text-align: center;
+	margin-top: 60px;
+	margin-bottom: 0;
+}
+
+h1 a {
+	font-size: 32px;
+	color: black;
+	text-decoration: none;
+	line-height: 60px;
+	transition: all 0.3s;
+}
+
+h2 {
+	padding: 30px 0;
+	text-align: center;
+}
+
+.login-form {
+	display: flex;
+	justify-content: center;
+}
+
+.login-items {
+	display: block;
+	width: 320px;
+}
+
+.login-item {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 40px;
+}
+
+.login-item:last-child {
+	padding-top: 30px;
+}
+
+.login-label {
+	line-height: 40px;
+}
+
+.login-input {
+	height: 40px;
+}
+
+.login-info {
+	width: 180px;
+	height: 60%;
+	border: solid 1px black;
+	border-radius: 5px;
+	line-height: 40px;
+	padding: 2px 6px;
+	margin: 5px 0;
+	outline: none;
+	appearance: none;
+}
+
+.login-submit {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding: 5px 0;
+}
+
+.login-submit input {
+	margin: 0;
+}
+
+.demo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 40px;
+	margin-top: 30px;
+}
+
+.demo p {
+	height: 40px;
+	line-height: 40px;
+	padding-right: 10px;
+	margin: 0;
+}
+
+#demo_button {
+	margin: 0;
+}
+
+.top, .list {
+	display: flex;
+	justify-content: center;
+}
+
+.menus {
+	width: 300px;
+	margin-top: 150px;
+}
+
+.menu {
+	width: 100%;
+	height: 60px;
+	text-align: center;
+}
+
+.menu a {
+	font-size: 30px;
+	color: black;
+	line-height: 60px;
+	transition: all 0.3s;
+}
+
+.menu a:hover, .link a:hover, .room_div a:hover, .booking_div a:hover {
+	opacity: 0.3;
+}
+
+.display {
+	width: 700px;
+	margin: 0 auto;
+}
+
+.display-tbody {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	width: 100%;
+	height: 60px;
+	border-bottom: solid 1px black;
+}
+
+.display-td {
+	width: 350px;
+	text-align: center;
+}
+
+#switch_password {
+	display: inline-block;
+	margin: 0 0 5px 10px;
+}
+
+.links {
+	display: block;
+	margin: 30px 0;
+}
+
+.link {
+	text-align: center;
+	margin: 10px 0;
+}
+
+.link a {
+	color: #00ccff;
+	font-size: 20px;
+	transition: all 0.3s;
+}
+
+.list .menus {
+	margin-top: 60px;
+}
+
+.room_display {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.room_div a {
+	display: block;
+	background-color: #66ffff;
+	color: black;
+	text-decoration: none;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 20px 0;
+	transition: all 0.3s;
+}
+
+.book {
+	width: 700px;
+	margin: 0 auto;
+}
+
+#book {
+	margin-bottom: 60px;
+}
+
+.date_inputs {
+	display: block;
+	width: 300px;
+	margin: 0 auto;
+}
+
+.date_input {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	margin: 10px 0;
+}
+
+.date_label {
+	display: block;
+	width: 100px;
+}
+
+.date {
+	width: 200px;
+	height: 40px;
+	border: solid 1px black;
+	border-radius: 5px;
+	outline: none;
+	appearance: none;
+}
+
+#date_error {
+	text-align: center;
+}
+
+#book_btn {
+	margin: 30px auto 0;
+}
+
+.confirm_booking {
+	margin-top: 60px;
+}
+
+.confirm_booking p {
+	font-size: 24px;
+	color: black;
+	text-align: center;
+	margin-bottom: 60px;
+}
+
+.booking_div {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.booking_div a {
+	display: block;
+	background-color: #66ffff;
+	color: black;
+	box-sizing: border-box;
+	width: 100%;
+	text-decoration: none;
+	border-radius: 10px;
+	padding: 10px;
+	transition: all 0.3s;
+}
+
+.booking {
+	text-align: center;
+}
+
+.room_display_tbody a {
+	display: block;
+	width: 300px;
+	margin: 30px auto 0;
+}
+
+.room_display_td {
+	text-align: center;
+}
+
+.forms {
+	display: flex;
+	justify-content: center;
+	margin-top: 60px;
+	margin-bottom: 60px;
+}
+
+#cancel_btn, #update_btn {
+	width: 150px;
+	margin: 0 20px;
+}
+
+footer {
+	display: flex;
+	justify-content: center;
+	background-color: #66ffff;
+	width: 100%;
+	height: 40px;
+}
+
+small {
+	color: black;
+	font-size: 13px;
+	line-height: 40px;
 }

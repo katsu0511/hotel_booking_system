@@ -4,7 +4,7 @@
 <main>
 	<div class="container">
 		<div class="confirm_booking">
-			<p>Your booking has been completed!</p>
+			<p>Your booking date has been changed!</p>
 			<div class="links">
 				<div class="link">
 					<a href="<%= request.getContextPath() %>/top">Top</a>

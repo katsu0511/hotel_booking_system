@@ -56,7 +56,6 @@ public class BookServlet extends HttpServlet {
 			PreparedStatement pstmt3 = null;
 			ResultSet rset1 = null;
 			ResultSet rset2 = null;
-			ResultSet rset3 = null;
 			
 			String hotelId = request.getParameter("hotel_id");
 			String guestId = request.getParameter("guest_id");
@@ -69,8 +68,8 @@ public class BookServlet extends HttpServlet {
 			try {
 				conn = db.getConnection();
 				String sql1 = "SELECT GuestID "
-						+ "FROM Guest "
-						+ "WHERE Email = ? AND Password = ?";
+							+ "FROM Guest "
+							+ "WHERE Email = ? AND Password = ?";
 				pstmt1 = conn.prepareStatement(sql1);
 				pstmt1.setString(1, EMAIL);
 				pstmt1.setString(2, PASSWORD);
@@ -87,11 +86,12 @@ public class BookServlet extends HttpServlet {
 				
 				String sql2 = "SELECT CheckInDate, CheckOutDate "
 							+ "FROM Book "
-							+ "WHERE HotelID = ? AND RoomNumber = ? "
-							+ "ORDER BY CheckInDate;";
+							+ "WHERE HotelID = ? AND RoomNumber = ? OR GuestID = ? "
+							+ "ORDER BY CheckInDate";
 				pstmt2 = conn.prepareStatement(sql2);
 				pstmt2.setString(1, hotelId);
 				pstmt2.setString(2, roomNumber);
+				pstmt2.setString(3, guestId);
 				rset2 = pstmt2.executeQuery();
 				ArrayList<Map<String, LocalDate>> checkDates = new ArrayList<Map<String, LocalDate>>();
 				while (rset2.next()) {
@@ -114,6 +114,19 @@ public class BookServlet extends HttpServlet {
 				}
 				
 				
+				if (guestAuthentication && datesAuthentication) {
+					String sql3 = "INSERT INTO Book (GuestID, HotelID, RoomNumber, CheckInDate, CheckOutDate, PaymentType, Paid) "
+							+ "VALUES (?, ?, ?, ?, ?, null, 0)";
+					pstmt3 = conn.prepareStatement(sql3);
+					pstmt3.setString(1, guestId);
+					pstmt3.setString(2, hotelId);
+					pstmt3.setString(3, roomNumber);
+					pstmt3.setString(4, checkIn.toString());
+					pstmt3.setString(5, checkOut.toString());
+					pstmt3.executeUpdate();
+				}
+				
+				
 				hotelId = URLEncoder.encode(hotelId, "UTF-8");
 				guestId = URLEncoder.encode(guestId, "UTF-8");
 				roomNumber = URLEncoder.encode(roomNumber, "UTF-8");
@@ -127,6 +140,12 @@ public class BookServlet extends HttpServlet {
 				
 				try {
 					pstmt2.close();
+				} catch (SQLException e) { }
+				
+				try {
+					if (guestAuthentication && datesAuthentication) {
+						pstmt3.close();
+					}
 				} catch (SQLException e) { }
 				
 				try {
@@ -147,7 +166,7 @@ public class BookServlet extends HttpServlet {
 			} else if (!guestAuthentication) {
 				response.sendRedirect(request.getContextPath() + "/top");
 			} else {
-				response.sendRedirect(request.getContextPath() + "/show/room?id=" + hotelId + "&number=" + roomNumber);
+				response.sendRedirect(request.getContextPath() + "/show/room?id=" + hotelId + "&number=" + roomNumber + "&checkIn=" + checkIn + "&checkOut=" + checkOut);
 			}
 		}
 	}

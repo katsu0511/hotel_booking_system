@@ -17,12 +17,12 @@ if (switchPassword !== null) {
 		if (passwordSpan.classList.contains('secret')) {
 			passwordSpan.classList.remove('secret');
 			passwordSpan.classList.add('open');
-			switchPassword.value = 'see password';
+			switchPassword.value = 'hide password';
 			passwordSpan.textContent = openPassword.value;
 		} else {
 			passwordSpan.classList.remove('open');
 			passwordSpan.classList.add('secret');
-			switchPassword.value = 'hide password';
+			switchPassword.value = 'see password';
 			passwordSpan.textContent = secretPassword.value;
 		}
 	});
@@ -33,8 +33,14 @@ const checkIn = document.getElementById('check_in');
 const checkOut = document.getElementById('check_out');
 const checkInError = document.getElementById('check_in_error');
 const checkOutError = document.getElementById('check_out_error');
+const datesError = document.getElementById('dates_error');
 if (bookBtn !== null) {
 	bookBtn.addEventListener('click', (event) => {
+		const today = new Date();
+		const year = today.getFullYear();
+		const month = ("0" + String(today.getMonth() + 1)).slice(-2);
+		const day = ("0" + String(today.getDate())).slice(-2);
+		const date = year + "-" + month + "-" + day;
 		if (checkIn.value === '') {
 			checkInError.style.display = 'block';
 		} else {
@@ -47,14 +53,31 @@ if (bookBtn !== null) {
 			checkOutError.style.display = 'none';
 		}
 		
+		if (checkIn.value >= checkOut.value || checkIn.value < date || checkOut.value <= date) {
+			datesError.style.display = 'block';
+		} else {
+			datesError.style.display = 'none';
+		}
+		
 		if (checkIn.value === '') {
 			checkIn.focus();
 		} else if (checkOut.value === '') {
 			checkOut.focus();
+		} else if (checkIn.value >= checkOut.value || checkIn.value < date || checkOut.value <= date) {
+			event.preventDefault();
 		} else {
 			if (!confirm('Book on these dates?')) {
 				event.preventDefault();
 			}
+		}
+	});
+}
+
+const cancelBtn = document.getElementById('cancel_btn');
+if (cancelBtn !== null) {
+	cancelBtn.addEventListener('click', (event) => {
+		if (!confirm('Are you sure to cancel?')) {
+			event.preventDefault();
 		}
 	});
 }

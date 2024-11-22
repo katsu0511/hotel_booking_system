@@ -29,7 +29,7 @@
 					%>
 					<div class="display-td">
 						<span id="password_span" class="secret"><%= secretPassword %></span>
-						<input type="button" id="switch_password" value="see password">
+						<input type="button" id="switch_password" class="button" value="see password">
 						<input type=hidden id="open_password" value="<%= password %>">
 						<input type=hidden id="secret_password" value="<%= secretPassword %>">
 					</div>
@@ -39,7 +39,11 @@
 					<div class="display-td"><%= profile.get("countryCode") %> (<%= profile.get("phoneNumber").substring(0, 3) %>) <%= profile.get("phoneNumber").substring(3) %></div>
 				</div>
 			</div>
-			<a href="<%= request.getContextPath() %>/top">Back to Top</a>
+			<div class="links">
+				<div class="link">
+					<a href="<%= request.getContextPath() %>/top">Back to Top</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </main>

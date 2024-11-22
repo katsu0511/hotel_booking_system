@@ -45,8 +45,6 @@ public class ShowRoomServlet extends HttpServlet {
 		} else {
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset=UTF-8");
-			final String HOTEL_ID = request.getParameter("id");
-			final String ROOM_NUMBER = request.getParameter("number");
 			HotelDAO db = new HotelDAO();
 			Connection conn = null;
 			PreparedStatement pstmt1 = null;
@@ -55,13 +53,20 @@ public class ShowRoomServlet extends HttpServlet {
 			ResultSet rset1 = null;
 			ResultSet rset2 = null;
 			ResultSet rset3 = null;
+			
+			final String HOTEL_ID = request.getParameter("id");
+			final String ROOM_NUMBER = request.getParameter("number");
+			final String CHECK_IN = request.getParameter("checkIn");
+			final String CHECK_OUT = request.getParameter("checkOut");
 
 			try {
 				conn = db.getConnection();
 				String sql1 = "SELECT h.HotelID, h.Name, c.CountryCode, n.PhoneNumber, h.Street, p.City, p.Province, c.Country, p.PostalCode "
-						+ "FROM Hotel h, HotelCountry c, HotelPostalCode p, HotelPhoneNumber n "
-						+ "WHERE h.PhoneNumber = n.PhoneNumber AND h.PostalCode = p.PostalCode AND n.CountryCode = c.CountryCode "
-						+ "AND h.HotelID = ?";
+							+ "FROM Hotel h, HotelCountry c, HotelPostalCode p, HotelPhoneNumber n "
+							+ "WHERE h.PhoneNumber = n.PhoneNumber "
+							+ "AND h.PostalCode = p.PostalCode "
+							+ "AND n.CountryCode = c.CountryCode "
+							+ "AND h.HotelID = ?";
 				pstmt1 = conn.prepareStatement(sql1);
 				pstmt1.setString(1, HOTEL_ID);
 				rset1 = pstmt1.executeQuery();
@@ -80,8 +85,12 @@ public class ShowRoomServlet extends HttpServlet {
 				
 				
 				String sql2 = "SELECT r.RoomNumber, r.RoomType, c.Cost, t.Tax "
-						+ "FROM Hotel h, Room r, RoomCost c, CostAndTax t "
-						+ "WHERE h.HotelID = r.HotelID AND (h.HotelID = c.HotelID AND r.RoomType = c.RoomType) AND c.Cost = t.Cost AND h.HotelID = ? AND r.RoomNumber = ?";
+							+ "FROM Hotel h, Room r, RoomCost c, CostAndTax t "
+							+ "WHERE h.HotelID = r.HotelID "
+							+ "AND (h.HotelID = c.HotelID AND r.RoomType = c.RoomType) "
+							+ "AND c.Cost = t.Cost "
+							+ "AND h.HotelID = ? "
+							+ "AND r.RoomNumber = ?";
 				pstmt2 = conn.prepareStatement(sql2);
 				pstmt2.setString(1, HOTEL_ID);
 				pstmt2.setString(2, ROOM_NUMBER);
@@ -111,6 +120,8 @@ public class ShowRoomServlet extends HttpServlet {
 				request.setAttribute("hotel", hotel);
 				request.setAttribute("room", room);
 				request.setAttribute("guestId", guestId);
+				request.setAttribute("checkIn", CHECK_IN);
+				request.setAttribute("checkOut", CHECK_OUT);
 
 			} catch (SQLException e) {
 				e.printStackTrace();

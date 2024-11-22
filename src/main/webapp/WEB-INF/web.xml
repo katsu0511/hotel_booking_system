@@ -109,4 +109,54 @@
     <servlet-name>ConfirmBookingServlet</servlet-name>
     <url-pattern>/ConfirmBookingServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IndexBookingServlet</display-name>
+    <servlet-name>IndexBookingServlet</servlet-name>
+    <servlet-class>book.IndexBookingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IndexBookingServlet</servlet-name>
+    <url-pattern>/IndexBookingServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShowBookingServlet</display-name>
+    <servlet-name>ShowBookingServlet</servlet-name>
+    <servlet-class>book.ShowBookingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowBookingServlet</servlet-name>
+    <url-pattern>/ShowBookingServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CancelBookingServlet</display-name>
+    <servlet-name>CancelBookingServlet</servlet-name>
+    <servlet-class>book.CancelBookingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CancelBookingServlet</servlet-name>
+    <url-pattern>/CancelBookingServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateBookingServlet</display-name>
+    <servlet-name>UpdateBookingServlet</servlet-name>
+    <servlet-class>book.UpdateBookingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateBookingServlet</servlet-name>
+    <url-pattern>/UpdateBookingServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConfirmBookingUpdateServlet</display-name>
+    <servlet-name>ConfirmBookingUpdateServlet</servlet-name>
+    <servlet-class>book.ConfirmBookingUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConfirmBookingUpdateServlet</servlet-name>
+    <url-pattern>/ConfirmBookingUpdateServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
