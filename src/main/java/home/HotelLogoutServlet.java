@@ -10,16 +10,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class HotelLogoutServlet
  */
-@WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/hotel_logout")
+public class HotelLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public HotelLogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +30,18 @@ public class LogoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		final String EMAIL = (String) session.getAttribute("email");
-		final String PASSWORD = (String) session.getAttribute("password");
 		final String COUNTRY = (String) session.getAttribute("country");
 		final String NUMBER = (String) session.getAttribute("number");
+		final String EMAIL = (String) session.getAttribute("email");
+		final String PASSWORD = (String) session.getAttribute("password");
 		
-		if (EMAIL != null && PASSWORD != null) {
+		if (COUNTRY != null && NUMBER != null) {
 			session.invalidate();
-			response.sendRedirect(request.getContextPath() + "/login");
-		} else if (COUNTRY != null && NUMBER != null) {
-			response.sendRedirect(request.getContextPath() + "/hotel_top");
+			response.sendRedirect(request.getContextPath() + "/hotel_login");
+		} else if (EMAIL != null && PASSWORD != null) {
+			response.sendRedirect(request.getContextPath() + "/top");
 		} else {
-			response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(request.getContextPath() + "/hotel_login");
 		}
 	}
 }

@@ -33,11 +33,17 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		final String EMAIL = (String) session.getAttribute("email");
+		final String PASSWORD = (String) session.getAttribute("password");
+		final String COUNTRY = (String) session.getAttribute("country");
+		final String NUMBER = (String) session.getAttribute("number");
 		
-		if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
-			request.getRequestDispatcher("/WEB-INF/app/home/login.jsp").forward(request, response);
-		} else {
+		if (EMAIL != null && PASSWORD != null) {
 			response.sendRedirect(request.getContextPath() + "/top");
+		} else if (COUNTRY != null && NUMBER != null) {
+			response.sendRedirect(request.getContextPath() + "/hotel_top");
+		} else {
+			request.getRequestDispatcher("/WEB-INF/app/home/login.jsp").forward(request, response);
 		}
 	}
 

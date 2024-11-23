@@ -8,6 +8,16 @@ if (demoButton !== null) {
 	});
 }
 
+const hotelDemoButton = document.getElementById('hotel_demo_button');
+const country = document.getElementById('country');
+const number = document.getElementById('number');
+if (hotelDemoButton !== null) {
+	hotelDemoButton.addEventListener('click', () => {
+		country.value = 'Canada';
+		number.value = '7787372748';
+	});
+}
+
 const passwordSpan = document.getElementById('password_span');
 const switchPassword = document.getElementById('switch_password');
 const openPassword = document.getElementById('open_password');
@@ -79,5 +89,17 @@ if (cancelBtn !== null) {
 		if (!confirm('Are you sure to cancel?')) {
 			event.preventDefault();
 		}
+	});
+}
+
+const paidBtns = document.getElementsByClassName('paid_btn');
+const paidBtnArray = Array.from(paidBtns);
+if (paidBtnArray !== null) {
+	paidBtnArray.forEach(function(paidBtn) {
+		paidBtn.addEventListener('click', function(event) {
+			if (!confirm('Change to complete?')) {
+				event.preventDefault();
+			}
+		});
 	});
 }

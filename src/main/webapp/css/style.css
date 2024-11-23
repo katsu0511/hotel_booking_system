@@ -117,7 +117,7 @@ h2 {
 }
 
 .login-info {
-	width: 180px;
+	width: 170px;
 	height: 60%;
 	border: solid 1px black;
 	border-radius: 5px;
@@ -126,6 +126,15 @@ h2 {
 	margin: 5px 0;
 	outline: none;
 	appearance: none;
+}
+
+#country {
+	width: 184px;
+	height: 30px;
+	border: solid 1px black;
+	border-radius: 5px;
+	margin: 5px 0;
+	outline: none;
 }
 
 .login-submit {
@@ -344,6 +353,47 @@ h2 {
 #cancel_btn, #update_btn {
 	width: 150px;
 	margin: 0 20px;
+}
+
+.hotel_title {
+	padding-top: 60px;
+}
+
+.hotel_top {
+	margin-top: 100px;;
+}
+
+.booking_table {
+	border: solid 1px black;
+}
+
+.booking_table, .booking_thead, .booking_row {
+	width: 100%;
+}
+
+.booking_row {
+	display: flex;
+}
+
+.booking_th, .booking_td {
+	width: 150px;
+	height: 40px;
+	border: solid 1px black;
+	box-sizing: border-box;
+	line-height: 40px;
+}
+
+.booking_th {
+	font-weight: bold;
+}
+
+.booking_td {
+	min-height: 40px;
+	max-height: 80px;
+}
+
+.paid_btn {
+	margin: 5px auto;
 }
 
 footer {

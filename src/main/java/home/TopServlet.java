@@ -30,20 +30,17 @@ public class TopServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		final String EMAIL = (String) session.getAttribute("email");
+		final String PASSWORD = (String) session.getAttribute("password");
+		final String COUNTRY = (String) session.getAttribute("country");
+		final String NUMBER = (String) session.getAttribute("number");
 		
-		if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
-			response.sendRedirect(request.getContextPath() + "/login");
-		} else {
+		if (EMAIL != null && PASSWORD != null) {
 			request.getRequestDispatcher("/WEB-INF/app/home/top.jsp").forward(request, response);
+		} else if (COUNTRY != null && NUMBER != null) {
+			response.sendRedirect(request.getContextPath() + "/hotel_top");
+		} else {
+			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

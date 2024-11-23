@@ -18,5 +18,10 @@
 					<button type="submit" class="button logout">Logout</button>
 				</form>
 			<% } %>
+			<% if (session.getAttribute("country") != null && session.getAttribute("number") != null) { %>
+				<form class="header-btn" action="<%= request.getContextPath() %>/hotel_logout" method="POST">
+					<button type="submit" class="button logout">Logout</button>
+				</form>
+			<% } %>
 		</div>
 	</header>

@@ -159,4 +159,54 @@
     <servlet-name>ConfirmBookingUpdateServlet</servlet-name>
     <url-pattern>/ConfirmBookingUpdateServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HotelLoginServlet</display-name>
+    <servlet-name>HotelLoginServlet</servlet-name>
+    <servlet-class>home.HotelLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HotelLoginServlet</servlet-name>
+    <url-pattern>/HotelLoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HotelTopServlet</display-name>
+    <servlet-name>HotelTopServlet</servlet-name>
+    <servlet-class>home.HotelTopServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HotelTopServlet</servlet-name>
+    <url-pattern>/HotelTopServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HotelLogoutServlet</display-name>
+    <servlet-name>HotelLogoutServlet</servlet-name>
+    <servlet-class>home.HotelLogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HotelLogoutServlet</servlet-name>
+    <url-pattern>/HotelLogoutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BookingStatusServlet</display-name>
+    <servlet-name>BookingStatusServlet</servlet-name>
+    <servlet-class>book.BookingStatusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BookingStatusServlet</servlet-name>
+    <url-pattern>/BookingStatusServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PaidServlet</display-name>
+    <servlet-name>PaidServlet</servlet-name>
+    <servlet-class>book.PaidServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PaidServlet</servlet-name>
+    <url-pattern>/PaidServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -37,6 +37,12 @@
 			<p>Demo Account :</p>
 			<input type="button" id="demo_button" class="button" value="Demo">
 		</div>
+		
+		<div class="links">
+			<div class="link">
+				<a href="<%= request.getContextPath() %>/hotel_login">For hotel operator</a>
+			</div>
+		</div>
 	</div>
 </main>
 
