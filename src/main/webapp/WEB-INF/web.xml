@@ -209,4 +209,24 @@
     <servlet-name>PaidServlet</servlet-name>
     <url-pattern>/PaidServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServiceStatusServlet</display-name>
+    <servlet-name>ServiceStatusServlet</servlet-name>
+    <servlet-class>service.ServiceStatusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServiceStatusServlet</servlet-name>
+    <url-pattern>/ServiceStatusServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IndexStaffServlet</display-name>
+    <servlet-name>IndexStaffServlet</servlet-name>
+    <servlet-class>staff.IndexStaffServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IndexStaffServlet</servlet-name>
+    <url-pattern>/IndexStaffServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -18,5 +18,5 @@
 		</div>
 	</div>
 </main>
-	
+
 <jsp:include page="../common/footer.jsp" flush="true"/>

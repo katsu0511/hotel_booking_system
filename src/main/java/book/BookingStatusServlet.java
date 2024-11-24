@@ -50,8 +50,12 @@ public class BookingStatusServlet extends HttpServlet {
 			Connection conn = null;
 			PreparedStatement pstmt1 = null;
 			PreparedStatement pstmt2 = null;
+			PreparedStatement pstmt3 = null;
+			PreparedStatement pstmt4 = null;
 			ResultSet rset1 = null;
 			ResultSet rset2 = null;
+			ResultSet rset3 = null;
+			ResultSet rset4 = null;
 
 			try {
 				conn = db.getConnection();
@@ -73,33 +77,72 @@ public class BookingStatusServlet extends HttpServlet {
 				}
 				
 				
-				String sql2 = "SELECT g.GuestID, g.Name, h.HotelID, r.RoomNumber, r.RoomType, b.CheckInDate, b.CheckOutDate, b.PaymentType, b.Paid "
-							+ "FROM Book b, Guest g, Hotel h, Room r "
-							+ "WHERE b.GuestID = g.GuestID "
-							+ "AND b.HotelID = h.HotelID "
-							+ "AND h.HotelID = r.HotelID "
-							+ "AND b.RoomNumber = r.RoomNumber "
-							+ "AND b.HotelID = ?";
+				String sql2 = "SELECT g.GuestID, g.Name, h.HotelID, r.RoomNumber, b.CheckInDate, b.CheckOutDate, b.PaymentType, b.Paid "
+						+ "FROM Book b, Guest g, Hotel h, Room r "
+						+ "WHERE b.GuestID = g.GuestID "
+						+ "AND b.HotelID = h.HotelID "
+						+ "AND h.HotelID = r.HotelID "
+						+ "AND b.RoomNumber = r.RoomNumber "
+						+ "AND b.HotelID = ?";
 				pstmt2 = conn.prepareStatement(sql2);
 				pstmt2.setString(1, hotelId);
 				rset2 = pstmt2.executeQuery();
 				ArrayList<Map<String, String>> bookings = new ArrayList<Map<String, String>>();
 				
+				String sql3 = "SELECT Name "
+							+ "FROM Staff "
+							+ "WHERE HotelID = ? "
+							+ "AND StaffID = ("
+							+ "  SELECT StaffID "
+							+ "  FROM Handles "
+							+ "  WHERE GuestID = ?"
+							+ "  AND HotelID = ?"
+							+ "  AND RoomNumber = ?"
+							+ "  AND CheckInDate = ?"
+							+ "  AND CheckOutDate = ?"
+							+ ")";
 				while (rset2.next()) {
 					Map<String, String> booking = new HashMap<>();
 					booking.put("guestId", rset2.getString(1));
 					booking.put("guestName", rset2.getString(2));
 					booking.put("hotelId", rset2.getString(3));
 					booking.put("roomNumber", rset2.getString(4));
-					booking.put("roomType", rset2.getString(5));
-					booking.put("checkInDate", rset2.getString(6));
-					booking.put("checkOutDate", rset2.getString(7));
-					booking.put("paymentType", rset2.getString(8));
-					booking.put("paid", rset2.getString(9));
+					booking.put("checkInDate", rset2.getString(5));
+					booking.put("checkOutDate", rset2.getString(6));
+					booking.put("paymentType", rset2.getString(7));
+					booking.put("paid", rset2.getString(8));
+					pstmt3 = conn.prepareStatement(sql3);
+					pstmt3.setString(1, hotelId);
+					pstmt3.setString(2, rset2.getString(1));
+					pstmt3.setString(3, rset2.getString(3));
+					pstmt3.setString(4, rset2.getString(4));
+					pstmt3.setString(5, rset2.getString(5));
+					pstmt3.setString(6, rset2.getString(6));
+					rset3 = pstmt3.executeQuery();
+					if (rset3.next()) {
+						booking.put("staffName", rset3.getString(1));
+					}
 					bookings.add(booking);
 				}
 				
+				
+				String sql4 = "SELECT StaffID, Name "
+							+ "FROM Staff "
+							+ "WHERE HotelID = ?";
+				pstmt4 = conn.prepareStatement(sql4);
+				pstmt4.setString(1, hotelId);
+				rset4 = pstmt4.executeQuery();
+				ArrayList<Map<String, String>> staffs = new ArrayList<Map<String, String>>();
+				while (rset4.next()) {
+					Map<String, String> staff = new HashMap<>();
+					staff.put("staffId", rset4.getString(1));
+					staff.put("staffName", rset4.getString(2));
+					staffs.add(staff);
+				}
+				
+				
 				request.setAttribute("bookings", bookings);
+				request.setAttribute("staffs", staffs);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -113,11 +156,27 @@ public class BookingStatusServlet extends HttpServlet {
 				} catch (SQLException e) { }
 				
 				try {
+					pstmt3.close();
+				} catch (SQLException e) { }
+				
+				try {
+					pstmt4.close();
+				} catch (SQLException e) { }
+				
+				try {
 					rset1.close();
 				} catch (SQLException e) { }
 				
 				try {
 					rset2.close();
+				} catch (SQLException e) { }
+				
+				try {
+					rset3.close();
+				} catch (SQLException e) { }
+				
+				try {
+					rset4.close();
 				} catch (SQLException e) { }
 				
 				try {

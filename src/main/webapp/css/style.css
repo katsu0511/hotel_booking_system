@@ -173,6 +173,10 @@ h2 {
 	justify-content: center;
 }
 
+.booking_list {
+	text-align: center;
+}
+
 .menus {
 	width: 300px;
 	margin-top: 150px;
@@ -314,7 +318,7 @@ h2 {
 
 .booking_div {
 	width: 400px;
-	margin: 0 auto;
+	margin: 30px auto;
 }
 
 .booking_div a {
@@ -329,7 +333,7 @@ h2 {
 	transition: all 0.3s;
 }
 
-.booking {
+.booking, .training {
 	text-align: center;
 }
 
@@ -363,7 +367,7 @@ h2 {
 	margin-top: 100px;;
 }
 
-.booking_table {
+.booking_table, .training_table {
 	border: solid 1px black;
 }
 
@@ -371,25 +375,50 @@ h2 {
 	width: 100%;
 }
 
-.booking_row {
+.training_table {
+	margin: 0 auto;
+}
+
+.training_table, .training_thead, .training_row {
+	width: 600px;
+}
+
+.booking_row, .training_row {
 	display: flex;
 }
 
-.booking_th, .booking_td {
-	width: 150px;
+.booking_th, .booking_td, .service_th, .service_td, .training_th, .training_td {
 	height: 40px;
 	border: solid 1px black;
 	box-sizing: border-box;
 	line-height: 40px;
 }
 
-.booking_th {
+.booking_th, .booking_td {
+	width: 150px;
+}
+
+.service_th, .service_td, .training_th, .training_td {
+	width: 300px;
+}
+
+.booking_th, .service_th, .training_th {
 	font-weight: bold;
 }
 
-.booking_td {
+.booking_td, .service_td, .training_td {
 	min-height: 40px;
 	max-height: 80px;
+}
+
+.book_info {
+	position: relative;
+	bottom: 2px;
+	width: 140px;
+	height: 30px;
+	border: solid 1px black;
+	border-radius: 5px;
+	outline: none;
 }
 
 .paid_btn {

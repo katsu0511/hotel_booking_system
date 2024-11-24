@@ -94,11 +94,43 @@ if (cancelBtn !== null) {
 
 const paidBtns = document.getElementsByClassName('paid_btn');
 const paidBtnArray = Array.from(paidBtns);
+const staffIdError = document.getElementById('staff_id_error');
+const paymentTypeError = document.getElementById('payment_type_error');
 if (paidBtnArray !== null) {
 	paidBtnArray.forEach(function(paidBtn) {
 		paidBtn.addEventListener('click', function(event) {
-			if (!confirm('Change to complete?')) {
+			const bookingTd = paidBtn.parentElement.parentElement;
+			const staffIdTd = bookingTd.previousElementSibling.previousElementSibling.previousElementSibling;
+			const staffId = staffIdTd.firstElementChild;
+			const paymentTypeTd = staffIdTd.nextElementSibling;
+			const paymentType = paymentTypeTd.firstElementChild;
+			const staffIdText = bookingTd.querySelector('input.staff_id');
+			const paymentTypeText = bookingTd.querySelector('input.payment_type');
+			staffIdText.value = staffId.value;
+			paymentTypeText.value = paymentType.value;
+			
+			if (staffId.value === '') {
+				staffIdError.style.display = 'block';
+			} else {
+				staffIdError.style.display = 'none';
+			}
+			
+			if (paymentType.value === '') {
+				paymentTypeError.style.display = 'block';
+			} else {
+				paymentTypeError.style.display = 'none';
+			}
+			
+			if (staffId.value === '') {
+				staffId.focus();
 				event.preventDefault();
+			} else if (paymentType.value === '') {
+				paymentType.focus();
+				event.preventDefault();
+			} else {
+				if (!confirm('Change to complete?')) {
+					event.preventDefault();
+				}
 			}
 		});
 	});

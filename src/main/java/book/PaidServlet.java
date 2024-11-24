@@ -44,36 +44,56 @@ public class PaidServlet extends HttpServlet {
 			response.setContentType("text/html;charset=UTF-8");
 			HotelDAO db = new HotelDAO();
 			Connection conn = null;
-			PreparedStatement pstmt = null;
+			PreparedStatement pstmt1 = null;
+			PreparedStatement pstmt2 = null;
 			
 			String guestId = request.getParameter("guest_id");
 			String hotelId = request.getParameter("hotel_id");
 			String roomNumber = request.getParameter("room_number");
 			String checkInDate = request.getParameter("check_in_date");
 			String checkOutDate = request.getParameter("check_out_date");
+			String staffId = request.getParameter("staff_id");
+			String paymentType = request.getParameter("payment_type");
 			
 			try {
 				conn = db.getConnection();
-				String sql = "UPDATE Book "
-						   + "SET Paid = 1 "
-						   + "WHERE GuestID = ? "
-						   + "AND HotelID = ? "
-						   + "AND RoomNumber = ? "
-						   + "AND CheckInDate = ? "
-						   + "AND CheckOutDate = ?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, guestId);
-				pstmt.setString(2, hotelId);
-				pstmt.setString(3, roomNumber);
-				pstmt.setString(4, checkInDate);
-				pstmt.setString(5, checkOutDate);
-				pstmt.executeUpdate();
+				String sql1 = "UPDATE Book "
+							+ "SET Paid = 1, PaymentType = ? "
+							+ "WHERE GuestID = ? "
+							+ "AND HotelID = ? "
+							+ "AND RoomNumber = ? "
+							+ "AND CheckInDate = ? "
+							+ "AND CheckOutDate = ?";
+				pstmt1 = conn.prepareStatement(sql1);
+				pstmt1.setString(1, paymentType);
+				pstmt1.setString(2, guestId);
+				pstmt1.setString(3, hotelId);
+				pstmt1.setString(4, roomNumber);
+				pstmt1.setString(5, checkInDate);
+				pstmt1.setString(6, checkOutDate);
+				pstmt1.executeUpdate();
+				
+				
+				String sql2 = "INSERT INTO Handles (StaffID, GuestID, HotelID, RoomNumber, CheckInDate, CheckOutDate) "
+							+ "VALUES (?, ?, ?, ?, ?, ?)";
+				pstmt2 = conn.prepareStatement(sql2);
+				pstmt2.setString(1, staffId);
+				pstmt2.setString(2, guestId);
+				pstmt2.setString(3, hotelId);
+				pstmt2.setString(4, roomNumber);
+				pstmt2.setString(5, checkInDate);
+				pstmt2.setString(6, checkOutDate);
+				pstmt2.executeUpdate();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				try {
-					pstmt.close();
+					pstmt1.close();
+				} catch (SQLException e) { }
+				
+				try {
+					pstmt2.close();
 				} catch (SQLException e) { }
 				
 				try {

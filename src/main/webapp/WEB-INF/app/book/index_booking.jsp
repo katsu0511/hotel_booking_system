@@ -8,7 +8,7 @@
 			<div class="display-title">
 				<h2>My Booking</h2>
 			</div>
-			<div class="list">
+			<div class="booking_list">
 			<% if (bookings.isEmpty()) { %>
 				<p>You don't have any bookings yet.</p>
 			<% } else { %>
