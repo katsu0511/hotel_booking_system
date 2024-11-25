@@ -52,6 +52,7 @@ public class IndexBookingServlet extends HttpServlet {
 			PreparedStatement pstmt2 = null;
 			ResultSet rset1 = null;
 			ResultSet rset2 = null;
+			ArrayList<Map<String, String>> bookings = new ArrayList<Map<String, String>>();
 
 			try {
 				conn = db.getConnection();
@@ -65,7 +66,6 @@ public class IndexBookingServlet extends HttpServlet {
 				pstmt1.setString(1, EMAIL);
 				pstmt1.setString(2, PASSWORD);
 				rset1 = pstmt1.executeQuery();
-				ArrayList<Map<String, String>> bookings = new ArrayList<Map<String, String>>();
 				
 				String sql2 = "SELECT Name "
 							+ "FROM Hotel "
@@ -94,18 +94,14 @@ public class IndexBookingServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
 				} catch (SQLException e) { }
 				
 				try {
 					rset1.close();
-				} catch (SQLException e) { }
-				
-				try {
-					rset2.close();
+					if (!bookings.isEmpty()) {
+						rset2.close();
+					}
 				} catch (SQLException e) { }
 				
 				try {
