@@ -48,42 +48,64 @@ public class IndexBookingServlet extends HttpServlet {
 			response.setContentType("text/html;charset=UTF-8");
 			HotelDAO db = new HotelDAO();
 			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
+			PreparedStatement pstmt1 = null;
+			PreparedStatement pstmt2 = null;
+			ResultSet rset1 = null;
+			ResultSet rset2 = null;
 
 			try {
 				conn = db.getConnection();
-				String sql = "SELECT h.HotelId, h.Name as Hotel, b.RoomNumber, b.CheckInDate, b.CheckOutDate "
-						   + "FROM Guest g, Book b, Hotel h "
-						   + "Where g.GuestID = b.GuestID AND b.HotelID = h.HotelID AND g.Email = ? AND g.Password = ?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, EMAIL);
-				pstmt.setString(2, PASSWORD);
-				rset = pstmt.executeQuery();
+				String sql1 = "SELECT b.HotelId, b.RoomNumber, b.CheckInDate, b.CheckOutDate "
+							+ "FROM Guest g "
+							+ "INNER JOIN Book b "
+							+ "ON g.GuestID = b.GuestID "
+							+ "AND g.Email = ? "
+							+ "AND g.Password = ?";
+				pstmt1 = conn.prepareStatement(sql1);
+				pstmt1.setString(1, EMAIL);
+				pstmt1.setString(2, PASSWORD);
+				rset1 = pstmt1.executeQuery();
 				ArrayList<Map<String, String>> bookings = new ArrayList<Map<String, String>>();
 				
-				while (rset.next()) {
+				String sql2 = "SELECT Name "
+							+ "FROM Hotel "
+							+ "WHERE HotelId = ?";
+				pstmt2 = conn.prepareStatement(sql2);
+				
+				while (rset1.next()) {
 					Map<String, String> booking = new HashMap<>();
-					booking.put("hotelId", rset.getString(1));
-					booking.put("hotel", rset.getString(2));
-					booking.put("roomNumber", rset.getString(3));
-					booking.put("checkInDate", rset.getString(4));
-					booking.put("checkOutDate", rset.getString(5));
+					booking.put("hotelId", rset1.getString(1));
+					pstmt2.setString(1, booking.get("hotelId"));
+					rset2 = pstmt2.executeQuery();
+					if (rset2.next()) {
+						booking.put("hotel", rset2.getString(1));
+					}
+					booking.put("roomNumber", rset1.getString(2));
+					booking.put("checkInDate", rset1.getString(3));
+					booking.put("checkOutDate", rset1.getString(4));
 					bookings.add(booking);
 				}
 				
+				
 				request.setAttribute("bookings", bookings);
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				try {
-					pstmt.close();
+					pstmt1.close();
 				} catch (SQLException e) { }
 				
 				try {
-					if (rset != null) {
-						rset.close();
-					}
+					pstmt2.close();
+				} catch (SQLException e) { }
+				
+				try {
+					rset1.close();
+				} catch (SQLException e) { }
+				
+				try {
+					rset2.close();
 				} catch (SQLException e) { }
 				
 				try {

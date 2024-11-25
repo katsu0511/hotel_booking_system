@@ -116,7 +116,7 @@ public class BookServlet extends HttpServlet {
 				
 				if (guestAuthentication && datesAuthentication) {
 					String sql3 = "INSERT INTO Book (GuestID, HotelID, RoomNumber, CheckInDate, CheckOutDate, PaymentType, Paid) "
-							+ "VALUES (?, ?, ?, ?, ?, null, 0)";
+								+ "VALUES (?, ?, ?, ?, ?, null, 0)";
 					pstmt3 = conn.prepareStatement(sql3);
 					pstmt3.setString(1, guestId);
 					pstmt3.setString(2, hotelId);

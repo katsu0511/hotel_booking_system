@@ -51,8 +51,10 @@ public class IndexRoomServlet extends HttpServlet {
 			Connection conn = null;
 			PreparedStatement pstmt1 = null;
 			PreparedStatement pstmt2 = null;
+			PreparedStatement pstmt3 = null;
 			ResultSet rset1 = null;
 			ResultSet rset2 = null;
+			ResultSet rset3 = null;
 
 			try {
 				conn = db.getConnection();
@@ -100,26 +102,35 @@ public class IndexRoomServlet extends HttpServlet {
 				}
 				
 				
+				String sql3 = "SELECT COUNT(*) "
+							+ "FROM Room "
+							+ "WHERE HotelID = ?";
+				pstmt3 = conn.prepareStatement(sql3);
+				pstmt3.setString(1, HOTEL_ID);
+				rset3 = pstmt3.executeQuery();
+				String numberOfRooms = "";
+				if (rset3.next()) {
+					numberOfRooms = rset3.getString(1);
+				}
+				
+				
 				request.setAttribute("hotel", hotel);
 				request.setAttribute("rooms", rooms);
+				request.setAttribute("numberOfRooms", numberOfRooms);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
+					pstmt3.close();
 				} catch (SQLException e) { }
 				
 				try {
 					rset1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset2.close();
+					rset3.close();
 				} catch (SQLException e) { }
 				
 				try {

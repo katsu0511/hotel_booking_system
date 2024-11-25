@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*" %>
 <jsp:include page="../common/header.jsp" flush="true"/>
 <% ArrayList<Map<String, String>> uses = (ArrayList<Map<String, String>>)request.getAttribute("uses"); %>
+<% ArrayList<String> vips = (ArrayList<String>)request.getAttribute("vips"); %>
 
 <main>
 	<div class="container">
@@ -29,6 +30,12 @@
 						</div>
 					<% } %>
 				</div>
+			</div>
+			<div class="display-title">
+				<h3>VIP</h3>
+				<% for (String vip : vips) { %>
+					<p class="vip"><%= vip %></p>
+				<% } %>
 			</div>
 			<div class="links">
 				<div class="link">

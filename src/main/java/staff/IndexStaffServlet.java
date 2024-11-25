@@ -151,25 +151,13 @@ public class IndexStaffServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt3.close();
 				} catch (SQLException e) { }
 				
 				try {
 					rset1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset3.close();
 				} catch (SQLException e) { }
 				

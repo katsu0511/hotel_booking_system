@@ -11,7 +11,7 @@ public class DBManager extends HotelDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = "SELECT Email,Password FROM Guest WHERE Email=? AND Password=?";
+		String sql = "SELECT Email,Password FROM Guest WHERE Email = ? AND Password = ?";
 		UserDTO user = null;
 		
 		try {

@@ -2,6 +2,7 @@
 <jsp:include page="../common/header.jsp" flush="true"/>
 <% ArrayList<Map<String, String>> bookings = (ArrayList<Map<String, String>>)request.getAttribute("bookings"); %>
 <% ArrayList<Map<String, String>> staffs = (ArrayList<Map<String, String>>)request.getAttribute("staffs"); %>
+<% String numberOfBooks = (String)request.getAttribute("numberOfBooks"); %>
 
 <main>
 	<div class="container">
@@ -81,6 +82,7 @@
 				</div>
 				<p id="staff_id_error" class="error">Please select a staff who handles the payment.</p>
 				<p id="payment_type_error" class="error">Please select payment type.</p>
+				<p>Total number of bookings: <%= numberOfBooks %></p>
 			</div>
 			<div class="links">
 				<div class="link">

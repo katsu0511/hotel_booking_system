@@ -52,10 +52,12 @@ public class BookingStatusServlet extends HttpServlet {
 			PreparedStatement pstmt2 = null;
 			PreparedStatement pstmt3 = null;
 			PreparedStatement pstmt4 = null;
+			PreparedStatement pstmt5 = null;
 			ResultSet rset1 = null;
 			ResultSet rset2 = null;
 			ResultSet rset3 = null;
 			ResultSet rset4 = null;
+			ResultSet rset5 = null;
 
 			try {
 				conn = db.getConnection();
@@ -141,42 +143,39 @@ public class BookingStatusServlet extends HttpServlet {
 				}
 				
 				
+				String sql5 = "SELECT COUNT(*) "
+							+ "FROM Book "
+							+ "WHERE HotelID = ?";
+				pstmt5 = conn.prepareStatement(sql5);
+				pstmt5.setString(1, hotelId);
+				rset5 = pstmt5.executeQuery();
+				String numberOfBooks = "";
+				if (rset5.next()) {
+					numberOfBooks = rset5.getString(1);
+				}
+				
+				
 				request.setAttribute("bookings", bookings);
 				request.setAttribute("staffs", staffs);
+				request.setAttribute("numberOfBooks", numberOfBooks);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt3.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt4.close();
+					pstmt5.close();
 				} catch (SQLException e) { }
 				
 				try {
 					rset1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset3.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset4.close();
+					rset5.close();
 				} catch (SQLException e) { }
 				
 				try {

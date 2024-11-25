@@ -178,7 +178,7 @@ h2 {
 }
 
 .menus {
-	width: 300px;
+	width: 600px;
 	margin-top: 150px;
 }
 
@@ -189,10 +189,25 @@ h2 {
 }
 
 .menu a {
-	font-size: 30px;
+	display: block;
 	color: black;
-	line-height: 60px;
+	font-size: 30px;
+	height: 60px;
+	text-decoration: none;
 	transition: all 0.3s;
+	margin: 10px 0;
+}
+
+.hotel_name {
+	display: inline-block;
+	font-size: 30px;
+	line-height: 60px;
+}
+
+.hotel_costs {
+	display: inline-block;
+	font-size: 20px;
+	line-height: 60px;
 }
 
 .menu a:hover, .link a:hover, .room_div a:hover, .booking_div a:hover {
@@ -215,6 +230,10 @@ h2 {
 
 .display-td {
 	width: 350px;
+	text-align: center;
+}
+
+.vip {
 	text-align: center;
 }
 

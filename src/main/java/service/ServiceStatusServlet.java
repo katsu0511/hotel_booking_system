@@ -50,8 +50,10 @@ public class ServiceStatusServlet extends HttpServlet {
 			Connection conn = null;
 			PreparedStatement pstmt1 = null;
 			PreparedStatement pstmt2 = null;
+			PreparedStatement pstmt3 = null;
 			ResultSet rset1 = null;
 			ResultSet rset2 = null;
+			ResultSet rset3 = null;
 
 			try {
 				conn = db.getConnection();
@@ -74,13 +76,13 @@ public class ServiceStatusServlet extends HttpServlet {
 				
 				
 				String sql2 = "SELECT g.Name, s.Type, u.Date, u.Time "
-						   + "FROM Hotel h, Offer o, Service s, Uses u, Guest g "
-						   + "WHERE h.HotelID = o.HotelID "
-						   + "AND o.ServiceID = s.ServiceID "
-						   + "AND u.HotelID = h.HotelID "
-						   + "AND u.ServiceID = s.ServiceID "
-						   + "AND u.GuestID = g.GuestID "
-						   + "AND h.HotelID = ?";
+							+ "FROM Hotel h, Offer o, Service s, Uses u, Guest g "
+							+ "WHERE h.HotelID = o.HotelID "
+							+ "AND o.ServiceID = s.ServiceID "
+							+ "AND u.HotelID = h.HotelID "
+							+ "AND u.ServiceID = s.ServiceID "
+							+ "AND u.GuestID = g.GuestID "
+							+ "AND h.HotelID = ?";
 				pstmt2 = conn.prepareStatement(sql2);
 				pstmt2.setString(1, hotelId);
 				rset2 = pstmt2.executeQuery();
@@ -95,25 +97,45 @@ public class ServiceStatusServlet extends HttpServlet {
 					uses.add(use);
 				}
 				
+				
+				String sql3 = "SELECT g.Name "
+							+ "FROM Guest g "
+							+ "JOIN Uses u "
+							+ "ON g.GuestID = u.GuestID "
+							+ "AND u.HotelID = ? "
+							+ "GROUP BY g.GuestID, g.Name "
+							+ "HAVING COUNT(DISTINCT u. ServiceID) = ("
+							+ "    SELECT COUNT(*)"
+							+ "    FROM Offer"
+							+ "    WHERE HotelID = ?"
+							+ ")";
+				pstmt3 = conn.prepareStatement(sql3);
+				pstmt3.setString(1, hotelId);
+				pstmt3.setString(2, hotelId);
+				rset3 = pstmt3.executeQuery();
+				ArrayList<String> vips = new ArrayList<String>();
+				
+				while (rset3.next()) {
+					vips.add(rset3.getString(1));
+				}
+				
+				
 				request.setAttribute("uses", uses);
+				request.setAttribute("vips", vips);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
+					pstmt3.close();
 				} catch (SQLException e) { }
 				
 				try {
 					rset1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset2.close();
+					rset3.close();
 				} catch (SQLException e) { }
 				
 				try {

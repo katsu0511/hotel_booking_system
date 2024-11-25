@@ -2,6 +2,7 @@
 <jsp:include page="../common/header.jsp" flush="true"/>
 <% Map<String, String> hotel = (Map<String, String>)request.getAttribute("hotel"); %>
 <% ArrayList<Map<String, String>> rooms = (ArrayList<Map<String, String>>)request.getAttribute("rooms"); %>
+<% String numberOfRooms = (String)request.getAttribute("numberOfRooms"); %>
 
 <main>
 	<div class="container">
@@ -17,6 +18,10 @@
 				<div class="display-tbody">
 					<div class="display-td">Phone Number</div>
 					<div class="display-td"><%= hotel.get("countryCode") %> (<%= hotel.get("phoneNumber").substring(0, 3) %>) <%= hotel.get("phoneNumber").substring(3) %></div>
+				</div>
+				<div class="display-tbody">
+					<div class="display-td">Number of Rooms</div>
+					<div class="display-td"><%= numberOfRooms %> rooms</div>
 				</div>
 			</div>
 			<div class="room_display">
