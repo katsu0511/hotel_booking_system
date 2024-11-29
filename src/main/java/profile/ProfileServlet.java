@@ -54,7 +54,8 @@ public class ProfileServlet extends HttpServlet {
 				conn = db.getConnection();
 				String sql = "SELECT Name, Email, Password, CountryCode, PhoneNumber "
 						   + "FROM Guest "
-						   + "WHERE Email = ? AND Password = ?";
+						   + "WHERE Email = ? "
+						   + "AND Password = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, EMAIL);
 				pstmt.setString(2, PASSWORD);

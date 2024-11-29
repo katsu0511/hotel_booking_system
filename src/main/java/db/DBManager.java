@@ -11,7 +11,10 @@ public class DBManager extends HotelDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = "SELECT Email,Password FROM Guest WHERE Email = ? AND Password = ?";
+		String sql = "SELECT Email, Password "
+				   + "FROM Guest "
+				   + "WHERE Email = ? "
+				   + "AND Password = ?";
 		UserDTO user = null;
 		
 		try {
@@ -43,7 +46,9 @@ public class DBManager extends HotelDAO {
 		ResultSet rset = null;
 		String sql = "SELECT c.Country, h.PhoneNumber "
 				   + "FROM Hotel h, HotelCountry c "
-				   + "WHERE h.Country = c.Country AND h.Country = ? AND h.PhoneNumber = ?";
+				   + "WHERE h.Country = c.Country "
+				   + "AND h.Country = ? "
+				   + "AND h.PhoneNumber = ?";
 		HotelDTO hotel = null;
 		
 		try {

@@ -55,7 +55,8 @@ public class IndexHotelServlet extends HttpServlet {
 
 			try {
 				conn = db.getConnection();
-				String sql1 = "SELECT HotelID, Name FROM Hotel";
+				String sql1 = "SELECT HotelID, Name "
+							+ "FROM Hotel";
 				pstmt1 = conn.prepareStatement(sql1);
 				rset1 = pstmt1.executeQuery();
 				ArrayList<Map<String, String>> hotels = new ArrayList<Map<String, String>>();

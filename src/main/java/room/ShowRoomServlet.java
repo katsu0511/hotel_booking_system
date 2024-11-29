@@ -106,7 +106,8 @@ public class ShowRoomServlet extends HttpServlet {
 				
 				String sql3 = "SELECT GuestID "
 							+ "FROM Guest "
-							+ "WHERE Email = ? AND Password = ?";
+							+ "WHERE Email = ? "
+							+ "AND Password = ?";
 				pstmt3 = conn.prepareStatement(sql3);
 				pstmt3.setString(1, EMAIL);
 				pstmt3.setString(2, PASSWORD);

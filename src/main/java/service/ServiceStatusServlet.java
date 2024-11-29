@@ -104,7 +104,7 @@ public class ServiceStatusServlet extends HttpServlet {
 							+ "ON g.GuestID = u.GuestID "
 							+ "AND u.HotelID = ? "
 							+ "GROUP BY g.GuestID, g.Name "
-							+ "HAVING COUNT(DISTINCT u. ServiceID) = ("
+							+ "HAVING COUNT(DISTINCT u.ServiceID) = ("
 							+ "    SELECT COUNT(*)"
 							+ "    FROM Offer"
 							+ "    WHERE HotelID = ?"
