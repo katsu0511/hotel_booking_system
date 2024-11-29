@@ -58,7 +58,8 @@ public class HotelLoginServlet extends HttpServlet {
 
 			try {
 				conn = db.getConnection();
-				String sql = "SELECT Country FROM HotelCountry";
+				String sql = "SELECT Country "
+						   + "FROM HotelCountry";
 				pstmt = conn.prepareStatement(sql);
 				rset = pstmt.executeQuery();
 				ArrayList<String> countries = new ArrayList<String>();
