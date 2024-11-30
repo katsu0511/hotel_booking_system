@@ -251,13 +251,7 @@ public class UpdateBookingServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					if (guestAuthentication && datesAuthentication) {
 						pstmt3.close();
 					}
@@ -265,9 +259,6 @@ public class UpdateBookingServlet extends HttpServlet {
 				
 				try {
 					rset1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset2.close();
 				} catch (SQLException e) { }
 				

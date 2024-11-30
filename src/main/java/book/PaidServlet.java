@@ -90,9 +90,6 @@ public class PaidServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
 				} catch (SQLException e) { }
 				
