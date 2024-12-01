@@ -95,18 +95,12 @@ public class IndexBookingServlet extends HttpServlet {
 				try {
 					pstmt1.close();
 					pstmt2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset1.close();
 					if (!bookings.isEmpty()) {
 						rset2.close();
 					}
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/book/index_booking.jsp").forward(request, response);

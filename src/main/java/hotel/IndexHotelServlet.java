@@ -98,16 +98,10 @@ public class IndexHotelServlet extends HttpServlet {
 				try {
 					pstmt1.close();
 					pstmt2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset1.close();
 					rset2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/hotel/index_hotel.jsp").forward(request, response);

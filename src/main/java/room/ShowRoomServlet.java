@@ -131,17 +131,11 @@ public class ShowRoomServlet extends HttpServlet {
 					pstmt1.close();
 					pstmt2.close();
 					pstmt3.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset1.close();
 					rset2.close();
 					rset3.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/room/show_room.jsp").forward(request, response);

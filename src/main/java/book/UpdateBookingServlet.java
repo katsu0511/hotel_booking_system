@@ -118,15 +118,9 @@ public class UpdateBookingServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/book/update_booking.jsp").forward(request, response);
@@ -255,16 +249,10 @@ public class UpdateBookingServlet extends HttpServlet {
 					if (guestAuthentication && datesAuthentication) {
 						pstmt3.close();
 					}
-				} catch (SQLException e) { }
-				
-				try {
 					rset1.close();
 					rset2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			if (guestAuthentication && datesAuthentication) {

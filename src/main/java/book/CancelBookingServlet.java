@@ -81,11 +81,8 @@ public class CancelBookingServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			response.sendRedirect(request.getContextPath() + "/index/booking");

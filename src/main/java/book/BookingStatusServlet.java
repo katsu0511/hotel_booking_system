@@ -168,19 +168,13 @@ public class BookingStatusServlet extends HttpServlet {
 					pstmt3.close();
 					pstmt4.close();
 					pstmt5.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset1.close();
 					rset2.close();
 					rset3.close();
 					rset4.close();
 					rset5.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/book/booking_status.jsp").forward(request, response);
