@@ -136,29 +136,14 @@ public class BookServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					if (guestAuthentication && datesAuthentication) {
 						pstmt3.close();
 					}
-				} catch (SQLException e) { }
-				
-				try {
 					rset1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			if (guestAuthentication && datesAuthentication) {

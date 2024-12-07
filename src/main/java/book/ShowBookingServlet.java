@@ -59,7 +59,7 @@ public class ShowBookingServlet extends HttpServlet {
 
 			try {
 				conn = db.getConnection();
-				String sql = "SELECT g.GuestID, h.HotelId, h.Name, h.Street, hpc.City, hpc.Province, hc.Country, hpc.PostalCode, hpn.CountryCode, hpn.PhoneNumber, b.RoomNumber, r.RoomType, rc.Cost, cat.Tax, b.CheckInDate, CheckOutDate "
+				String sql = "SELECT g.GuestID, h.HotelId, h.Name, h.Street, hpc.City, hpc.Province, hc.Country, hpc.PostalCode, hpn.CountryCode, hpn.PhoneNumber, b.RoomNumber, r.RoomType, rc.Cost, cat.Tax, b.CheckInDate, b.CheckOutDate "
 						   + "FROM Guest g, Hotel h, HotelCountry hc, HotelPostalCode hpc, HotelPhoneNumber hpn, Room r, RoomCost rc, CostAndTax cat, Book b "
 						   + "WHERE g.GuestID = b.GuestID "
 						   + "AND b.HotelID = h.HotelID "
@@ -116,15 +116,9 @@ public class ShowBookingServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/book/show_booking.jsp").forward(request, response);

@@ -56,7 +56,11 @@ public class CancelBookingServlet extends HttpServlet {
 			try {
 				conn = db.getConnection();
 				String sql = "DELETE FROM Book "
-						   + "WHERE GuestID = ? AND HotelID = ? AND RoomNumber = ? AND CheckInDate = ? AND CheckOutDate = ?";
+						   + "WHERE GuestID = ? "
+						   + "AND HotelID = ? "
+						   + "AND RoomNumber = ? "
+						   + "AND CheckInDate = ? "
+						   + "AND CheckOutDate = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, guestId);
 				pstmt.setString(2, hotelId);
@@ -77,11 +81,8 @@ public class CancelBookingServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			response.sendRedirect(request.getContextPath() + "/index/booking");

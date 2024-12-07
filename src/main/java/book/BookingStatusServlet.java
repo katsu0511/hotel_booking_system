@@ -80,12 +80,12 @@ public class BookingStatusServlet extends HttpServlet {
 				
 				
 				String sql2 = "SELECT g.GuestID, g.Name, h.HotelID, r.RoomNumber, b.CheckInDate, b.CheckOutDate, b.PaymentType, b.Paid "
-						+ "FROM Book b, Guest g, Hotel h, Room r "
-						+ "WHERE b.GuestID = g.GuestID "
-						+ "AND b.HotelID = h.HotelID "
-						+ "AND h.HotelID = r.HotelID "
-						+ "AND b.RoomNumber = r.RoomNumber "
-						+ "AND b.HotelID = ?";
+							+ "FROM Book b, Guest g, Hotel h, Room r "
+							+ "WHERE b.GuestID = g.GuestID "
+							+ "AND b.HotelID = h.HotelID "
+							+ "AND h.HotelID = r.HotelID "
+							+ "AND b.RoomNumber = r.RoomNumber "
+							+ "AND b.HotelID = ?";
 				pstmt2 = conn.prepareStatement(sql2);
 				pstmt2.setString(1, hotelId);
 				rset2 = pstmt2.executeQuery();
@@ -168,19 +168,13 @@ public class BookingStatusServlet extends HttpServlet {
 					pstmt3.close();
 					pstmt4.close();
 					pstmt5.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset1.close();
 					rset2.close();
 					rset3.close();
 					rset4.close();
 					rset5.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/book/booking_status.jsp").forward(request, response);

@@ -90,15 +90,9 @@ public class PaidServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			response.sendRedirect(request.getContextPath() + "/booking/status");

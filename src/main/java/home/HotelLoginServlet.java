@@ -58,7 +58,8 @@ public class HotelLoginServlet extends HttpServlet {
 
 			try {
 				conn = db.getConnection();
-				String sql = "SELECT Country FROM HotelCountry";
+				String sql = "SELECT Country "
+						   + "FROM HotelCountry";
 				pstmt = conn.prepareStatement(sql);
 				rset = pstmt.executeQuery();
 				ArrayList<String> countries = new ArrayList<String>();
@@ -74,15 +75,9 @@ public class HotelLoginServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/home/hotel_login.jsp").forward(request, response);

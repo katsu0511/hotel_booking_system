@@ -78,15 +78,9 @@ public class HotelTopServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/home/hotel_top.jsp").forward(request, response);

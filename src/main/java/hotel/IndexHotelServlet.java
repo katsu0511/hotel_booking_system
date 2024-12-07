@@ -55,7 +55,8 @@ public class IndexHotelServlet extends HttpServlet {
 
 			try {
 				conn = db.getConnection();
-				String sql1 = "SELECT HotelID, Name FROM Hotel";
+				String sql1 = "SELECT HotelID, Name "
+							+ "FROM Hotel";
 				pstmt1 = conn.prepareStatement(sql1);
 				rset1 = pstmt1.executeQuery();
 				ArrayList<Map<String, String>> hotels = new ArrayList<Map<String, String>>();
@@ -96,23 +97,11 @@ public class IndexHotelServlet extends HttpServlet {
 			} finally {
 				try {
 					pstmt1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					pstmt2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset1.close();
-				} catch (SQLException e) { }
-				
-				try {
 					rset2.close();
-				} catch (SQLException e) { }
-				
-				try {
 					conn.close();
-				} catch (SQLException e) {  }
+				} catch (SQLException e) { }
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/app/hotel/index_hotel.jsp").forward(request, response);
